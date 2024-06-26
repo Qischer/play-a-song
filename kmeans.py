@@ -1,30 +1,48 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
 
+
+features = ['danceability', 'energy', 'loudness', 'speechiness',
+            'acousticness','instrumentalness',
+            'liveliness','valence', 'tempo']
+
+
+def parseDF(df: pd.DataFrame):
+
+    fdf = df.filter(items=features)
+    
+    return fdf.to_numpy()
+
+
+def train(X: np.ndarray):
+    inr = []
+    for n in range(1,11):
+        km = KMeans(n_clusters=n).fit(X)
+        inr.append(km.inertia_)
+    
+    plt.plot(range(1,11), inr, marker='o')
+    plt.title('Elbow method')
+    plt.xlabel('Number of clusters')
+    plt.ylabel('Inertia')
+    plt.show()
+
+    return
+
+
+def cluster(df: pd.DataFrame, n: int):
+    km = KMeans(n_clusters=n).fit(X)
+
+    plt.scatter(df['danceability'], df['energy'], c=km.labels_)
+    plt.show()
+
+    return
 
 
 if __name__ == "__main__":
-
     df = pd.read_csv("dataset.csv")
-    
-    dance = np.array(df["danceability"])
-    energy = np.array(df["energy"])
-    tempo = np.array(df["tempo"])
 
-    gr = np.array(df["track_genre"])
-    fig, ax = plt.subplots(1,3)
 
-    # dance - energy
-    ax[0,0].scatter(dance, energy)
-    ax[0,0].set_title("energy - dance")
-
-    # energy - tempo
-    ax[0,1].scatter(energy, tempo)
-    ax[0,1].set_title("tempo - energy")
-
-    # dance - tempo
-    ax[0,2].scatter(dance, tempo)
-    ax[0,2].set_title("temp - dance")
-
-    plt.show()
+    X = parseDF(df)
+    cluster(df, 3)
