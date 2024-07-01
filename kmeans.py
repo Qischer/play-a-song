@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 
 
-features = ['danceability', 'energy', 'loudness', 'speechiness',
-            'acousticness','instrumentalness',
+features = ['danceability', 'energy', 'loudness', 
+            'speechiness', 'acousticness','instrumentalness',
             'liveliness','valence', 'tempo']
 
 
@@ -31,10 +31,21 @@ def train(X: np.ndarray):
     return
 
 
-def cluster(df: pd.DataFrame, n: int):
+def cluster(df: pd.DataFrame, n: int, labels):
     km = KMeans(n_clusters=n).fit(X)
 
-    plt.scatter(df['danceability'], df['energy'], c=km.labels_)
+    fig = plt.figure()
+
+    for i, label in enumerate(labels):
+        ax = fig.add_subplot(projection='3d')
+
+        ax.scatter(df[label[0]], df[label[1]], df[label[2]], c=km.labels_)
+
+        ax.set_xlabel(label[0])
+        ax.set_ylabel(label[1])
+        ax.set_zlabel(label[2])
+    
+    plt.tight_layout()
     plt.show()
 
     return
@@ -43,6 +54,11 @@ def cluster(df: pd.DataFrame, n: int):
 if __name__ == "__main__":
     df = pd.read_csv("dataset.csv")
 
+    labels = np.array([
+        #['danceability', 'energy', 'loudness'],
+        ['speechiness', 'acousticness','instrumentalness'],
+        ])
 
     X = parseDF(df)
-    cluster(df, 3)
+
+    cluster(df, 5, labels)
