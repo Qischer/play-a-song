@@ -4,9 +4,9 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 
 
-features = ['danceability', 'energy', 'loudness', 
+features = ['danceability', 'energy', 'loudness',
             'speechiness', 'acousticness','instrumentalness',
-            'liveliness','valence', 'tempo']
+            'liveliness','valence']
 
 
 def parseDF(df: pd.DataFrame):
@@ -46,19 +46,25 @@ def cluster(df: pd.DataFrame, n: int, labels):
         ax.set_zlabel(label[2])
     
     plt.tight_layout()
-    plt.show()
+    # plt.show()
 
-    return
+    return km
 
 
 if __name__ == "__main__":
     df = pd.read_csv("dataset.csv")
 
     labels = np.array([
-        #['danceability', 'energy', 'loudness'],
-        ['speechiness', 'acousticness','instrumentalness'],
+        ['danceability', 'energy', 'loudness'],
+        # ['speechiness', 'acousticness','instrumentalness'],
         ])
 
+    ar = df.to_numpy()
     X = parseDF(df)
 
-    cluster(df, 5, labels)
+    cl = cluster(df, 5, labels)
+
+    for i in range(5): 
+        print("Label for ",i)
+        sample = ar[np.where(cl.labels_ == i)[0]]  
+        print(sample)
