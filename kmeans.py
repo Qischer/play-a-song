@@ -4,16 +4,7 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 
 
-features = ['danceability', 'energy', 'loudness',
-            'speechiness', 'acousticness','instrumentalness',
-            'liveliness','valence']
 
-
-def parseDF(df: pd.DataFrame):
-
-    fdf = df.filter(items=features)
-    
-    return fdf.to_numpy()
 
 
 def train(X: np.ndarray):
