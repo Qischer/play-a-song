@@ -1,46 +1,20 @@
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
+import main
 from sklearn.cluster import KMeans
 
-
-
-
-
 def train(X: np.ndarray):
-    inr = []
+    inertia = []
     for n in range(1,11):
         km = KMeans(n_clusters=n).fit(X)
-        inr.append(km.inertia_)
+        inertia.append(km.inertia_)
     
-    plt.plot(range(1,11), inr, marker='o')
-    plt.title('Elbow method')
-    plt.xlabel('Number of clusters')
-    plt.ylabel('Inertia')
-    plt.show()
+    return inertia
 
-    return
-
-
-def cluster(df: pd.DataFrame, n: int, labels):
+def cluster(X: np.ndarray, df: pd.DataFrame, n: int):
     km = KMeans(n_clusters=n).fit(X)
 
-    fig = plt.figure()
-
-    for i, label in enumerate(labels):
-        ax = fig.add_subplot(projection='3d')
-
-        ax.scatter(df[label[0]], df[label[1]], df[label[2]], c=km.labels_)
-
-        ax.set_xlabel(label[0])
-        ax.set_ylabel(label[1])
-        ax.set_zlabel(label[2])
-    
-    plt.tight_layout()
-    # plt.show()
-
     return km
-
 
 if __name__ == "__main__":
     df = pd.read_csv("dataset.csv")
@@ -51,7 +25,7 @@ if __name__ == "__main__":
         ])
 
     ar = df.to_numpy()
-    X = parseDF(df)
+    X = main.parseDF(df)
 
     cl = cluster(df, 5, labels)
 
