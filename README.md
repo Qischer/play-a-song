@@ -30,9 +30,20 @@ The following 9 audio features were used for clustering:
 ## Usage
 To run the clustering model, use the following command:
 ```shell
-python [script_name].py [-t] [n] [algorithm] [feature1] [feature2] [feature3]
+python main.py [-t] [n] [algorithm] [feature1] [feature2] [feature3]
 ```
 This command will run K-means with 5 clusters, show the training process, and display the clusters using valence, tempo, and energy features.
+
+## Visualization
+When run with default settings (e.g., `python main.py kmeans 5`), the plot will display:
+
+- X-axis: Danceability
+- Y-axis: Energy
+- Z-axis: Loudness
+
+Each point in the scatter plot represents a song, and the colors indicate different clusters. This visualization helps to understand how songs are grouped based on their audio features.
+
+![Clustering Result Example](./static/Figure_1.png)
 
 ## Dependencies
 - Python 3.x

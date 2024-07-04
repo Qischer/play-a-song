@@ -41,6 +41,14 @@ if __name__ == "__main__":
             n = int(sys.argv[2])
             cluster = km.cluster(X=X, df=df, n=n)
             labels = cluster.labels_
+            if len(sys.argv) > 3:
+                features = sys.argv[3:]
+                if len(features) < 3: 
+                    print("Please input at least 3 features for plot")
+                    exit(1)
+                dsp.scatter_plot(df=df, labels=labels, features=features)
+            else:
+                dsp.scatter_plot(df=df, labels=labels)
             pass
 
         case "dbscan":
@@ -48,11 +56,3 @@ if __name__ == "__main__":
             pass
 
 
-    if len(sys.argv) >= 3:
-        features = sys.argv[3:]
-        if len(features) < 3: 
-            print("Please input at least 3 features for plot")
-            exit(1)
-        dsp.scatter_plot(df=df, labels=labels, features=features)
-    else:
-        dsp.scatter_plot(df=df, labels=labels)
