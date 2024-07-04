@@ -4,7 +4,7 @@
 This project implements clustering algorithms to categorize 114,000 Spotify songs based on their audio features. The goal is to identify patterns and groupings within the music dataset using unsupervised machine learning techniques. The clusters are expected to represent underlying emotional characteristics of the songs.
 
 ## Dataset
-- Source: Spotify API
+- Source: 🎹 Spotify Tracks Dataset @ Kaggle - https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset
 - Size: 114,000 songs
 - Attributes: 9 audio features used for clustering
 
@@ -26,9 +26,6 @@ The following 9 audio features were used for clustering:
 7. Liveness
 8. Valence
 9. Tempo
-
-## Results
-[Summary of your findings - you can add this later]
 
 ## Usage
 To run the clustering model, use the following command:
