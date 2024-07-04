@@ -54,7 +54,7 @@ Each point in the scatter plot represents a song, and the colors indicate differ
 
 ## Installation
 ```shell
-pip install scikit-learn numpy pandas matplotlib seaborn
+pip install scikit-learn numpy pandas matplotlib
 ```
 
 ## Future Work
