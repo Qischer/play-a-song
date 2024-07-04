@@ -8,7 +8,7 @@ def km_train(inertia):
     plt.ylabel('Inertia')
     plt.show()
 
-def km_plot(df : pd.DataFrame, labels, features=['danceability', 'energy', 'loudness']):
+def scatter_plot(df : pd.DataFrame, labels, features=['danceability', 'energy', 'loudness']):
     
     fig = plt.figure()
 
